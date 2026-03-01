@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------------
 -- LuaJIT module to save/list bytecode.
 --
--- Copyright (C) 2005-2025 Mike Pall. All rights reserved.
+-- Copyright (C) 2005-2026 Mike Pall. All rights reserved.
 -- Released under the MIT license. See Copyright Notice in luajit.h
 ----------------------------------------------------------------------------
 --
@@ -165,6 +165,8 @@ extern "C"
 #endif
 #ifdef _WIN32
 __declspec(dllexport)
+#elif (defined(__ELF__) || defined(__MACH__) || defined(__psp2__)) && !((defined(__sun__) && defined(__svr4__)) || defined(__CELLOS_LV2__))
+__attribute__((visibility("default")))
 #endif
 const unsigned char %s%s[] = {
 ]], LJBC_PREFIX, ctx.modname))
